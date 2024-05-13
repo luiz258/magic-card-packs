@@ -1,0 +1,23 @@
+
+.filter__collection{
+  width: 100%;
+  margin: 20px;
+
+
+  &-filter{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    mat-form-field {
+      width: 25rem;
+      margin-right: 10px;
+    }
+    button{
+      height: 3.5rem;
+    }
+
+  }
+  }
+
+

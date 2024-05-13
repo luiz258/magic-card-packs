@@ -1,0 +1,12 @@
+.collection__list{
+  display: flex;
+  justify-content: center;
+    .card-transparent{
+    background-color: white;
+    opacity: 0.4;
+    width: 58rem;
+    height: 100%;
+    border-radius: 15px;
+    padding: 40px;
+    }
+}
