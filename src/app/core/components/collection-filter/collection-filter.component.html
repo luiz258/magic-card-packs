@@ -1,4 +1,3 @@
-
 <div class="filter__collection">
   <form class="filter__collection-filter">
     <mat-form-field class="">
@@ -6,13 +5,16 @@
       <input type="text" matInput placeholder="nome da coleção">
 
     </mat-form-field>
-    <mat-form-field class="">
-      <mat-label>Nome</mat-label>
-      <input type="text" matInput placeholder="nome da coleção">
-
+    <mat-form-field>
+      <mat-label>Bloco</mat-label>
+      <mat-select matNativeControl>
+        @for (block of blocks; track block) {
+        <mat-option [value]="block">{{block}}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
 
-      <button mat-flat-button>Pesquisar</button>
+    <button mat-flat-button>Pesquisar</button>
 
   </form>
 
