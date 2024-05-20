@@ -1,20 +1,32 @@
 <div class="filter__collection">
-  <form class="filter__collection-filter">
-    <mat-form-field class="">
+  <form class="filter__collection-filter" [formGroup]="form" (ngSubmit)="updateFilters()">
+    <mat-form-field>
       <mat-label>Nome</mat-label>
-      <input type="text" matInput placeholder="nome da coleção">
-
+      <input type="text" matInput formControlName="name" placeholder="nome da coleção">
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Bloco</mat-label>
-      <mat-select matNativeControl>
+      <mat-select matNativeControl formControlName="block">
         @for (block of blocks; track block) {
-        <mat-option [value]="block">{{block}}</mat-option>
+        <mat-option [value]="block" >{{block}}</mat-option>
         }
       </mat-select>
+
+      <!-- @if(!form.get('block').valid && form.get('block').touched){ -->
+      <div>
+        <!-- @if(form.get('block')?.errors?.required){
+        <span> This field is required.</span>
+        } -->
+        <!-- @if(form.get('block').errors.notNull){
+          <span>This field cannot be null.</span>
+
+        } -->
+      </div>
+      <!-- } -->
     </mat-form-field>
 
-    <button mat-flat-button>Pesquisar</button>
+    <button mat-flat-button type="submit" [disabled]="form.invalid" >Pesquisar</button>
 
   </form>
 

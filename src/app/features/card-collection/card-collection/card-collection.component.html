@@ -1,2 +1,2 @@
-<app-collection-filter />
-<app-collection-list />
+<app-collection-filter (dataEvent)="callMethod()" />
+<app-collection-list [data]="list$" />

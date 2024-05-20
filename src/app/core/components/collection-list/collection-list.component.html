@@ -1,11 +1,10 @@
 <div class="collection__list">
   <div class="collection__list-transparent">
-    <app-card name="Amonkhet Invocation" block="Amonkhet" releaseDate="10/05/2024" />
-    <app-card name="test" block="test" releaseDate="10/05/2024" />
-    <app-card name="test" block="test" releaseDate="10/05/2024" />
-    <app-card name="test" block="test" releaseDate="10/05/2024" />
-    <app-card name="test" block="test" releaseDate="10/05/2024" />
-    <app-card name="test" block="test" releaseDate="10/05/2024" />
-    <app-card name="test" block="test" releaseDate="10/05/2024" />
+    @if(data$ | async; as values){
+      {{values | json }}
+    @for( item of  values; track data?.code) {
+    <app-card [name]="item?.name" [block]="item?.block" [releaseDate]="item?.releaseDate" />
+    }
+  }
   </div>
 </div>

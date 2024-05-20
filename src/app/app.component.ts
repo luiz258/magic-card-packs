@@ -1,12 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule, provideEffects } from '@ngrx/effects';
+import { CollectionsService } from './core/services/collections.service';
+import { Store, StoreModule, StoreRootModule } from '@ngrx/store';
+import { collectionReducer } from './core/store/card-collection.reducer';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet
+  ],
+    providers: [
+
+    ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
