@@ -1,2 +1,5 @@
 <app-collection-filter (dataEvent)="callMethod()" />
-<app-collection-list [data]="list$" />
+{{ list$.list | async | json}}
+@if(list$.list | async; as values ){
+  <app-collection-list [data]="values.list" />
+}

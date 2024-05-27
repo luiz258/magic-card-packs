@@ -8,7 +8,7 @@ export enum DataActionTypes {
 
 export const updateFilters = createAction(
   DataActionTypes.UpdateFilters,
-  props<{ payload:any }>()
+  props<{ payload:any}>()
 );
 
 export const loadData = createAction(
@@ -23,4 +23,3 @@ export const loadDataFailure = createAction(
   DataActionTypes.LoadDataFailure,
   props<{ payload:any }>()
 );
-

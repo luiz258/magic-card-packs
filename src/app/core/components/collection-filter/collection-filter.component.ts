@@ -11,7 +11,7 @@ import { loadData, updateFilters } from '../../store/card-collection.action';
 import {  HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { selectFilters } from '../../store/card-collection.selector';
-import { Observable, catchError, map, of, switchMap } from 'rxjs';
+import { Observable, catchError, map, of, switchMap, filter } from 'rxjs';
 
 @Component({
   selector: 'app-collection-filter',
@@ -24,7 +24,7 @@ import { Observable, catchError, map, of, switchMap } from 'rxjs';
     MatButtonModule,
     MatSelectModule,
     HttpClientModule,
-    ReactiveFormsModule,CommonModule
+    ReactiveFormsModule, CommonModule
   ],
   providers: [],
   templateUrl: './collection-filter.component.html',
@@ -42,7 +42,7 @@ export class CollectionFilterComponent {
   ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(updateFilters({payload: ''}));
+    // this.store.dispatch(updateFilters({payload: 'Amonkhet'}));
 
     this.form = this.formBuilder.group({
       name: new FormControl(),
@@ -57,8 +57,8 @@ export class CollectionFilterComponent {
 
   updateFilters() {
     var queryParams = this.createFillter();
-    this.store.dispatch(updateFilters({payload: queryParams}));
-    this.store.dispatch(loadData());
+     this.store.dispatch(updateFilters({payload: {filter:queryParams, list: null}}));
+    // this.store.dispatch(loadData());
 
     this.dataEvent.emit();
   }

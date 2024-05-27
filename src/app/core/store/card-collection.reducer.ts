@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { loadData, loadDataFailure, loadDataSuccess, updateFilters } from './card-collection.action';
 
+import * as actions from './card-collection.action';
 export interface IAppState {
   collectionCard: any[] | null;
   filters: any;
@@ -8,21 +9,16 @@ export interface IAppState {
 
 
 export const appInitialState: IAppState = {
-    collectionCard: [
-      {
-        name :'tes'
-      }
-    ],
-    filters: {
-      name:'tes'
-    }
+    collectionCard: null,
+    filters: null
 }
 
-export const collectionReducer = createReducer(
+  const collectionReducer = createReducer(
   appInitialState,
   on(updateFilters, (state, {payload}) => ({
     ...state,
-    filters: payload,
+    filters: payload.filter,
+    collectionCard: payload.list
   })),
   on(loadDataSuccess, (state, {payload}) => ({
     ...state,
@@ -37,3 +33,6 @@ export const collectionReducer = createReducer(
   })),
 );
 
+export function dataReducer(state:any, action:any) {
+  return collectionReducer(state, action);
+}
