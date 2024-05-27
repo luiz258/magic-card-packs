@@ -2,9 +2,11 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { loadData, loadDataFailure, loadDataSuccess, updateFilters } from './card-collection.action';
 
 import * as actions from './card-collection.action';
+import { filter } from '../interfaces/filter.interface';
+import { collectionCard } from '../interfaces/collection.interface';
 export interface IAppState {
-  collectionCard: any[] | null;
-  filters: any;
+  collectionCard: collectionCard[] | null;
+  filters: filter| null;
 }
 
 
@@ -18,7 +20,6 @@ export const appInitialState: IAppState = {
   on(updateFilters, (state, {payload}) => ({
     ...state,
     filters: payload.filter,
-    collectionCard: payload.list
   })),
   on(loadDataSuccess, (state, {payload}) => ({
     ...state,

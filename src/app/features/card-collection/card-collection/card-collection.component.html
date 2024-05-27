@@ -1,5 +1,11 @@
 <app-collection-filter (dataEvent)="callMethod()" />
-{{ list$.list | async | json}}
-@if(list$.list | async; as values ){
-  <app-collection-list [data]="values.list" />
+
+
+@for (item of (list$ | async); track item.code) {
+  <div>
+   {{ item.name}}
+  </div>
+}
+@if(list$ | async; as values ){
+  <app-collection-list [data]="values" />
 }

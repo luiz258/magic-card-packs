@@ -30,7 +30,7 @@ export class CardCollectionEffects {
         this.service.getData(filtro.filter).pipe(
           map((data => {
             // this.store.dispatch(updateFilters( {payload: {filter:filtro.filter, list: data.sets}}))
-            this.store.dispatch(loadDataSuccess({payload: {filter:filtro.filter, list: data.sets}}))
+            this.store.dispatch(loadDataSuccess({payload:data.sets}))
 
             return data.sets;
           }))
