@@ -3,49 +3,53 @@ import { Component } from '@angular/core';
 import { CollectionFilterComponent } from '../../../core/components/collection-filter/collection-filter.component';
 import { CollectionListComponent } from '../../../core/components/collection-list/collection-list.component';
 import { Observable, map, take } from 'rxjs';
-import { select, Store, StoreRootModule } from '@ngrx/store';
 import { IAppState } from '../../../core/store/card-collection.reducer';
-import { selectAppState, selectData, selectFilters } from '../../../core/store/card-collection.selector';
+import {
+  selectAppState,
+  selectData,
+  selectFilters,
+} from '../../../core/store/card-collection.selector';
 import { CollectionsService } from '../../../core/services/collections.service';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { collectionCard } from '../../../core/interfaces/collection.interface';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-card-collection',
   standalone: true,
-  imports: [CollectionFilterComponent, CollectionListComponent, AsyncPipe, JsonPipe, StoreRootModule],
+  imports: [
+    CollectionFilterComponent,
+    CollectionListComponent,
+    AsyncPipe,
+    JsonPipe,
+  ],
   providers: [CollectionsService],
   templateUrl: './card-collection.component.html',
-  styleUrl: './card-collection.component.scss'
+  styleUrl: './card-collection.component.scss',
 })
 export class CardCollectionComponent {
-  data$!: Observable<any[] | null> ;
+  data$!: Observable<any[] | null>;
   filters$!: Observable<any>;
-  list$!: Observable<collectionCard[]| null> ; ;
+  list$!: Observable<collectionCard[] | null>;
   constructor(
     private store: Store<IAppState>,
-    private CollectionsService: CollectionsService,
-
-  ){
-    this.list$ =this.store.select((state) => {return state.collectionCard});
-  }
+    private CollectionsService: CollectionsService
+  ) {}
 
   ngOnInit() {
-    this.callMethod()
-    this.store.select(selectData).pipe(take(1)).subscribe({next:(res) => {console.log('res', res)}} );
+    this.list$ = this.store.select(selectData);
   }
 
-  callMethod(){
+  callMethod() {
     //  this.list$ = this.store.select(selectData);
-    this.list$ =this.store.select((state) => {return state.collectionCard});
+    // this.list$ = this.store.select((state) => {
+    //   return state.collectionCard;
+    // });
     // this.list$ =this.store.select(selectData).subscribe();
-    console.log(' log',this.list$);
+    console.log(' log', this.list$);
   }
-
-
 }
-
 
 // {
 //   "collectionCard": {

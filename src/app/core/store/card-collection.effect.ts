@@ -1,14 +1,34 @@
-import { Injectable, inject } from "@angular/core";
-import { loadDataSuccess, loadDataFailure, DataActionTypes, updateFilters } from './card-collection.action';
-import { catchError, map, of, switchMap, tap, withLatestFrom, filter, mergeMap, from, Observable } from 'rxjs';
-import { Action, Store, select } from "@ngrx/store";
-import { IAppState } from "./card-collection.reducer";
-import { CollectionsService } from "../services/collections.service";
+import { Injectable, inject } from '@angular/core';
+import {
+  loadDataSuccess,
+  loadDataFailure,
+  DataActionTypes,
+  updateFilters,
+} from './card-collection.action';
+import {
+  catchError,
+  map,
+  of,
+  switchMap,
+  tap,
+  withLatestFrom,
+  filter,
+  mergeMap,
+  from,
+  Observable,
+} from 'rxjs';
+import { Action, Store, select } from '@ngrx/store';
+import { IAppState } from './card-collection.reducer';
+import { CollectionsService } from '../services/collections.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 @Injectable()
 export class CardCollectionEffects {
-  constructor(private actions$: Actions, private service: CollectionsService, private store: Store<IAppState>) { }
+  constructor(
+    private actions$: Actions,
+    private service: CollectionsService,
+    private store: Store<IAppState>
+  ) {}
 
   // loadCollectionData$ = createEffect(() => {
   //   return this.actions$.pipe(
@@ -23,19 +43,25 @@ export class CardCollectionEffects {
   //   ))
   // })
 
-  loadCollectionData$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(DataActionTypes.UpdateFilters),
-      mergeMap((filtro: any) => from(
-        this.service.getData(filtro.filter).pipe(
-          map((data => {
-            // this.store.dispatch(updateFilters( {payload: {filter:filtro.filter, list: data.sets}}))
-            this.store.dispatch(loadDataSuccess({payload:data.sets}))
+  loadCollectionData$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(DataActionTypes.UpdateFilters),
+        mergeMap((filtro: any) =>
+          from(
+            this.service.getData(filtro.filter).pipe(
+              map((data) => {
+                // this.store.dispatch(updateFilters( {payload: {filter:filtro.filter, list: data.sets}}))
+                this.store.dispatch(loadDataSuccess({ payload: data.sets }));
 
-            return data.sets;
-          }))
+                return data.sets;
+              })
+            )
+          )
         )
-      )))}, {functional: true, dispatch: false }
+      );
+    },
+    { functional: true, dispatch: false }
   );
   //   loadCollectionData$  = createEffect(() =>
   //     this.actions$.pipe(
