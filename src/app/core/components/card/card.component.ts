@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import {MatCardModule} from '@angular/material/card';
 
 @Component({
@@ -13,11 +14,4 @@ export class CardComponent {
   @Input() block!: string | null;
   @Input() releaseDate!:string| null;
 
-
-
-construct(){
-  this.name = "Amonkhet invocation";
-  this.block = "Amonkhet";
-  this.releaseDate = "10/05/2024";
-}
 }

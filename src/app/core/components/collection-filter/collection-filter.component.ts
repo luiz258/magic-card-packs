@@ -1,6 +1,3 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import {
   FormBuilder,
   FormControl,
@@ -9,16 +6,20 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { Store } from '@ngrx/store';
-import { IAppState } from '../../store/card-collection.reducer';
-import { CollectionsService } from '../../services/collections.service';
-import { loadData, updateFilters } from '../../store/card-collection.action';
+
+import { Component, inject } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { selectFilters } from '../../store/card-collection.selector';
-import { Observable, catchError, map, of, switchMap, filter } from 'rxjs';
+
+import { Store } from '@ngrx/store';
+import { IAppState } from '../../store/card-collection.reducer';
+
+import { updateFilters } from '../../store/card-collection.action';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @Component({
   selector: 'app-collection-filter',
@@ -39,27 +40,21 @@ import { Observable, catchError, map, of, switchMap, filter } from 'rxjs';
   styleUrl: './collection-filter.component.scss',
 })
 export class CollectionFilterComponent {
-  @Output() dataEvent = new EventEmitter<string>();
+  private store = inject(Store<IAppState>);
+  private formBuilder = inject(FormBuilder);
+
   blocks: String[] = ['Amonkhet', 'Ixalan', 'Zendikar', 'Ravnica', 'Onslaught'];
   form!: FormGroup;
-  filter$!: Observable<any | null>;
-  constructor(
-    private store: Store<IAppState>,
-    private collectionsService: CollectionsService,
-    private formBuilder: FormBuilder
-  ) {}
 
   ngOnInit(): void {
-    // this.store.dispatch(updateFilters({payload: 'Amonkhet'}));
-
     this.form = this.formBuilder.group({
-      name: new FormControl(),
-      block: new FormControl([Validators.required, this.notNullValidator]),
+      name: [''],
+      block: ['', Validators.required, this.notNullValidator],
     });
   }
 
-  notNullValidator(control: any): { [key: string]: any } | null {
-    return control.value !== null
+  async notNullValidator(control: any): Promise<{ [key: string]: any } | null> {
+    return (await control.value) !== null
       ? null
       : { notNull: { value: control.value } };
   }
@@ -69,7 +64,6 @@ export class CollectionFilterComponent {
     this.store.dispatch(
       updateFilters({ payload: { filter: queryParams, list: null } })
     );
-    this.dataEvent.emit();
   }
 
   createFillter() {
@@ -84,7 +78,6 @@ export class CollectionFilterComponent {
 
     if (filterBlock !== '') queryString = queryString + '?block=' + filterBlock;
 
-    console.log(queryString);
     return queryString;
   }
 

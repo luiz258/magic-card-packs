@@ -12,21 +12,9 @@
         <mat-option [value]="block" >{{block}}</mat-option>
         }
       </mat-select>
-
-      <!-- @if(!form.get('block').valid && form.get('block').touched){ -->
-      <div>
-        <!-- @if(form.get('block')?.errors?.required){
-        <span> This field is required.</span>
-        } -->
-        <!-- @if(form.get('block').errors.notNull){
-          <span>This field cannot be null.</span>
-
-        } -->
-      </div>
-      <!-- } -->
     </mat-form-field>
 
-    <button mat-flat-button type="submit" [disabled]="form.invalid" >Pesquisar</button>
+    <button mat-flat-button type="submit" [disabled]="!form.valid" >Pesquisar</button>
 
   </form>
 

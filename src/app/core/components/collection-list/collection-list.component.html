@@ -1,7 +1,7 @@
 <div class="collection__list">
   <div class="collection__list-transparent">
     @for( item of data; track item?.code) {
-    <app-card [name]="item?.name" [block]="item?.block" [releaseDate]="item?.name" />
+    <app-card [name]="item?.name" [block]="item?.block" [releaseDate]="item?.releaseDate" />
     }
   </div>
 </div>
