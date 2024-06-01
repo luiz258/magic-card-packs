@@ -1,3 +1,4 @@
 export interface filter{
-  name: string
+  name: string;
+  block:string;
 }

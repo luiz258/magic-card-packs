@@ -1,5 +1,7 @@
-<app-collection-filter/>
+<app-collection-filter />
+
+<app-spinner />
 
 @if(list$ | async; as values ){
-  <app-collection-list [data]="values" />
+<app-collection-list [data]="values" />
 }

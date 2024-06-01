@@ -62,7 +62,7 @@ export class CollectionFilterComponent {
   updateFilters() {
     var queryParams = this.createFillter();
     this.store.dispatch(
-      updateFilters({ payload: { filter: queryParams, list: null } })
+      updateFilters({ payload:  queryParams })
     );
   }
 
@@ -78,6 +78,7 @@ export class CollectionFilterComponent {
 
     if (filterBlock !== '') queryString = queryString + '?block=' + filterBlock;
 
+    console.log(queryString);
     return queryString;
   }
 

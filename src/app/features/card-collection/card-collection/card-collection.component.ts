@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { collectionCard } from '../../../core/interfaces/collection.interface';
 import { CollectionFilterComponent } from '../../../core/components/collection-filter/collection-filter.component';
 import { CollectionListComponent } from '../../../core/components/collection-list/collection-list.component';
+import { SpinnerComponent } from '../../../core/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-card-collection',
@@ -19,6 +20,7 @@ import { CollectionListComponent } from '../../../core/components/collection-lis
     CollectionListComponent,
     AsyncPipe,
     JsonPipe,
+    SpinnerComponent
   ],
   providers: [],
   templateUrl: './card-collection.component.html',

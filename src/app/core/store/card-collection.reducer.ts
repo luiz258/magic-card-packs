@@ -25,7 +25,7 @@ export const collectionFeatureReducer = createFeature({
     appInitialState,
     on(updateFilters, (state, { payload }) => ({
       ...state,
-      filters: payload.filter,
+      filters: payload,
     })),
     on(loadDataSuccess, (state, { payload }) => ({
       ...state,
